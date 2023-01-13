@@ -10,6 +10,8 @@ import SwiftUI
 struct ContentView: View {
     @State var letfAmount = ""
     @State var rightAmount = ""
+    @State var leftCurrency: Currency = .silverPiece
+    @State var rightCurrency : Currency = .goldPiece
     
     var body: some View {
         ZStack {
@@ -37,13 +39,13 @@ struct ContentView: View {
                         // Currency
                         HStack {
                             // Currency Image
-                            Image("silverpiece")
+                            Image(currencyImage.allCases[Currency.allCases.firstIndex(of: leftCurrency)!].rawValue)
                                 .resizable()
                                 .scaledToFit()
                                 .frame(height: 33)
                             
                             // Currency text
-                            Text("Silver piece")
+                            Text(currencyText.allCases[Currency.allCases.firstIndex(of: leftCurrency)!].rawValue)
                                 .font(.headline)
                                 .foregroundColor(.white)
                         }
@@ -69,12 +71,12 @@ struct ContentView: View {
                         HStack {
                         
                             // Currency text
-                            Text("Gold Piece")
+                            Text(currencyText.allCases[Currency.allCases.firstIndex(of: rightCurrency)!].rawValue)
                                 .font(.headline)
                                 .foregroundColor(.white)
                             
                             // Currency Image
-                            Image("goldpiece")
+                            Image(currencyImage.allCases[Currency.allCases.firstIndex(of: rightCurrency)!].rawValue)
                                 .resizable()
                                 .scaledToFit()
                                 .frame(height: 33)

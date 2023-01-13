@@ -12,6 +12,8 @@ struct ContentView: View {
     @State var rightAmount = ""
     @State var leftCurrency: Currency = .silverPiece
     @State var rightCurrency : Currency = .goldPiece
+    @State var showSelectCurrency = false
+    @State var showExchangeInfo = false
     
     var body: some View {
         ZStack {
@@ -49,6 +51,12 @@ struct ContentView: View {
                                 .font(.headline)
                                 .foregroundColor(.white)
                         }
+                        .onTapGesture {
+                            showSelectCurrency.toggle()
+                        }
+                        .sheet(isPresented: $showSelectCurrency) {
+                            SelectCurrency(leftCurrency: $leftCurrency, rightCurrency: $rightCurrency)
+                        }
                         .padding(.bottom, -5)
                         
                         // Text Field
@@ -81,6 +89,12 @@ struct ContentView: View {
                                 .scaledToFit()
                                 .frame(height: 33)
                         }
+                        .onTapGesture {
+                            showSelectCurrency.toggle()
+                        }
+                        .sheet(isPresented: $showSelectCurrency) {
+                            SelectCurrency(leftCurrency: $leftCurrency, rightCurrency: $rightCurrency)
+                        }
                         .padding(.bottom, -5)
                         
                         // Text Field
@@ -103,6 +117,7 @@ struct ContentView: View {
                     
                     Button {
                         // Display exchange info screen
+                        showExchangeInfo.toggle()
                     } label: {
                         Image(systemName: "info.circle.fill")
                         
@@ -110,6 +125,9 @@ struct ContentView: View {
                     .font(.largeTitle)
                     .foregroundColor(.white)
                     .padding(.trailing)
+                    .sheet(isPresented: $showExchangeInfo) {
+                        ExchangeInfo()
+                    }
                 }
             }
             

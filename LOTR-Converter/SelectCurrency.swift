@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct SelectCurrency: View {
-    @State var gridLayout = [GridItem(), GridItem(), GridItem()]
     @Binding var leftCurrency: Currency
     @Binding var rightCurrency: Currency
     @Environment(\.dismiss) var dismiss
@@ -24,28 +23,16 @@ struct SelectCurrency: View {
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
                 
-                LazyVGrid(columns: gridLayout) {
-                    ForEach(0 ..< 5) { i in
-                        
-                        if Currency.allCases[i] == leftCurrency {
-                            CurrencyIcon(currencyImage: currencyImage.allCases[i ].rawValue, currenctyText: currencyText.allCases[i].rawValue)
-                                .overlay(RoundedRectangle(cornerRadius: 25)
-                                    .stroke(lineWidth: 3)
-                                    .opacity(0.5)
-                                )
-                                .shadow(color: .black, radius: 9)
-                        } else {
-                            CurrencyIcon(currencyImage: currencyImage.allCases[i ].rawValue, currenctyText: currencyText.allCases[i].rawValue)
-                        }
-                        
-                        
-                    }
-                }
-                
+                    // currency
+                IconGrid(currency: $leftCurrency)
                 
                 Text("Select the currency you would like to convert to:")
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
+                
+                // currency icons
+                IconGrid(currency: $rightCurrency)
+                
                 
                 Button("Done") {
                     dismiss()

@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var letfAmount = ""
+    @State var leftAmount = ""
     @State var rightAmount = ""
+    @State var leftAmountTemp = ""
+    @State var rightAmountTemp = ""
+    @State var leftTyping = false
+    @State var rightTyping = false
     @State var leftCurrency: Currency = .silverPiece
     @State var rightCurrency : Currency = .goldPiece
     @State var showSelectCurrency = false
@@ -60,10 +64,19 @@ struct ContentView: View {
                         .padding(.bottom, -5)
                         
                         // Text Field
-                        TextField("Amount", text: $letfAmount)
+                        TextField("Amount", text: $leftAmount, onEditingChanged: {
+                            typing in
+                            leftTyping = typing
+                            leftAmountTemp = leftAmount
+                        })
                             .padding(7)
                             .background(Color(UIColor.systemGray6))
                             .cornerRadius(7)
+                            .keyboardType(.decimalPad)
+                            .onChange(of: leftTyping ? leftAmount : leftAmountTemp) {
+                                _ in
+                                
+                            }
                             
                     }
                     

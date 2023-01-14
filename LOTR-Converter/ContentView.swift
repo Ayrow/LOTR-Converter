@@ -75,7 +75,7 @@ struct ContentView: View {
                             .keyboardType(.decimalPad)
                             .onChange(of: leftTyping ? leftAmount : leftAmountTemp) {
                                 _ in
-                                
+                                rightAmount = leftCurrency.convert(amountString: leftAmount, to: rightCurrency)
                             }
                             
                     }

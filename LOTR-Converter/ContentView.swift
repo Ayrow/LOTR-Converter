@@ -77,7 +77,10 @@ struct ContentView: View {
                                 _ in
                                 rightAmount = leftCurrency.convert(amountString: leftAmount, to: rightCurrency)
                             }
-                            
+                            .onChange(of: leftCurrency) {
+                                _ in
+                                leftAmount = rightCurrency.convert(amountString: leftAmount, to: rightCurrency)
+                            }
                     }
                     
                     // Equal sign
@@ -111,11 +114,24 @@ struct ContentView: View {
                         .padding(.bottom, -5)
                         
                         // Text Field
-                        TextField("Amount", text: $rightAmount)
+                        TextField("Amount", text: $rightAmount, onEditingChanged: {
+                            typing in
+                            rightTyping = typing
+                            rightAmountTemp = rightAmount
+                        })
                             .padding(7)
                             .background(Color(UIColor.systemGray6))
                             .cornerRadius(7)
                             .multilineTextAlignment(.trailing)
+                            .keyboardType(.decimalPad)
+                            .onChange(of: rightTyping ? rightAmount : rightAmountTemp) {
+                                _ in
+                                leftAmount = rightCurrency.convert(amountString: rightAmount, to: leftCurrency)
+                            }
+                            .onChange(of: rightCurrency) {
+                                _ in
+                                rightAmount = leftCurrency.convert(amountString: leftAmount, to: rightCurrency)
+                            }
                     }
                 }
                 .padding()

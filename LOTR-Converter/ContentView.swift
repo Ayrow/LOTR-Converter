@@ -14,10 +14,11 @@ struct ContentView: View {
     @State var rightAmountTemp = ""
     @State var leftTyping = false
     @State var rightTyping = false
-    @State var leftCurrency: Currency = .silverPiece
-    @State var rightCurrency : Currency = .goldPiece
+    @State var leftCurrency: Currency = Currency(rawValue: UserDefaults.standard.double(forKey: "left")) ?? .silverPiece
+    @State var rightCurrency : Currency = Currency(rawValue: UserDefaults.standard.double(forKey: "right")) ?? .goldPiece
     @State var showSelectCurrency = false
     @State var showExchangeInfo = false
+
     
     var body: some View {
         ZStack {
@@ -80,6 +81,7 @@ struct ContentView: View {
                             .onChange(of: leftCurrency) {
                                 _ in
                                 leftAmount = rightCurrency.convert(amountString: leftAmount, to: rightCurrency)
+                                UserDefaults.standard.set(leftCurrency.rawValue, forKey: "left")
                             }
                     }
                     
@@ -131,6 +133,7 @@ struct ContentView: View {
                             .onChange(of: rightCurrency) {
                                 _ in
                                 rightAmount = leftCurrency.convert(amountString: leftAmount, to: rightCurrency)
+                                UserDefaults.standard.set(rightCurrency.rawValue, forKey: "right")
                             }
                     }
                 }

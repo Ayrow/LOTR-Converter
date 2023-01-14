@@ -13,7 +13,7 @@ struct IconGrid: View {
     
     var body: some View {
         LazyVGrid(columns: gridLayout) {
-            ForEach(0 ..< 5) { i in
+            ForEach(0 ..< 6) { i in
                 
                 if Currency.allCases[i] == currency {
                     CurrencyIcon(currencyImage: currencyImage.allCases[i ].rawValue, currenctyText: currencyText.allCases[i].rawValue)

@@ -6,6 +6,7 @@
 //
 
 enum Currency: Double, CaseIterable {
+    case rock = 1320
     case copperPenny = 640
     case silverPenny = 64
     case silverPiece = 16
@@ -28,6 +29,7 @@ enum Currency: Double, CaseIterable {
 }
 
 enum currencyText: String, CaseIterable {
+    case rock = "rock"
     case copperPenny = "Copper Penny"
     case silverPenny = "Silver Penny"
     case silverPiece = "Silver Piece"
@@ -36,6 +38,7 @@ enum currencyText: String, CaseIterable {
 }
 
 enum currencyImage: String, CaseIterable {
+    case rock = "rock"
     case copperPenny = "copperpenny"
     case silverPenny = "silverpenny"
     case silverPiece = "silverpiece"
